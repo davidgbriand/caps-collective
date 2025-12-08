@@ -6,9 +6,18 @@ import * as fs from 'fs';
 // Initialize Firebase Admin SDK
 if (!admin.apps.length) {
   try {
-    // Read service account from file
-    const serviceAccountPath = path.join(process.cwd(), 'caps-collective-firebase-adminsdk-fbsvc-538699c71d.json');
-    const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, 'utf8'));
+    let serviceAccount;
+
+    // Try to read from environment variable first (for Vercel/production)
+    if (process.env.FIREBASE_SERVICE_ACCOUNT_JSON) {
+      serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON);
+      console.log('Firebase credentials loaded from environment variable');
+    } else {
+      // Fall back to file path (for local development)
+      const serviceAccountPath = path.join(process.cwd(), 'caps-collective-firebase-adminsdk-fbsvc-538699c71d.json');
+      serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, 'utf8'));
+      console.log('Firebase credentials loaded from file');
+    }
 
     admin.initializeApp({
       credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
