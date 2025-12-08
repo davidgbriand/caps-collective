@@ -1,65 +1,115 @@
-import Image from "next/image";
+'use client';
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useAuth } from '@/contexts/AuthContext';
+import Logo from '@/components/Logo';
+import { BRANDING, LANDING_FEATURES, LANDING_STATS } from '@/lib/branding';
 
 export default function Home() {
+  const { user, userData, loading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading && user && userData) {
+      // Admin users go to admin dashboard
+      if (userData.isAdmin) {
+        router.push('/admin');
+      } else {
+        router.push('/dashboard');
+      }
+    }
+  }, [user, userData, loading, router]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-pattern">
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#99D6EA] border-t-[#00245D]"></div>
+      </div>
+    );
+  }
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="min-h-screen overflow-hidden bg-pattern">
+      {/* Decorative Elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-[#99D6EA] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+        <div className="absolute top-40 right-10 w-96 h-96 bg-[#00245D] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-[#99D6EA] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
+      </div>
+
+      {/* Navigation */}
+      <nav className="relative z-10 container mx-auto px-6 py-6 flex justify-between items-center">
+        <Logo size="lg" showText={false} />
+        <div className="flex items-center gap-4">
+          <Link href="/login" className="text-[#00245D] hover:text-[#00245D]/70 font-medium transition-colors">Sign In</Link>
+          <Link href="/register" className="bg-[#00245D] text-white px-5 py-2.5 rounded-xl font-medium hover:shadow-lg hover:shadow-[#00245D]/25 transition-all hover:-translate-y-0.5">Get Started</Link>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+      </nav>
+
+      {/* Hero Section */}
+      <main className="relative z-10 container mx-auto px-6 py-16 md:py-24">
+        <div className="text-center max-w-4xl mx-auto animate-fadeIn">
+          {/* Together We Dare Image */}
+          <div className="mb-8 flex justify-center">
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+              src="/together-we-dare-transparent.png"
+              alt="Together We Dare"
+              width={600}
+              height={193}
+              unoptimized
+              priority
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </div>
+
+          <div className="inline-flex items-center gap-2 bg-white/80 text-[#00245D] px-4 py-2 rounded-full text-sm font-medium mb-6 border border-[#99D6EA]">
+            <span className="w-2 h-2 bg-[#00245D] rounded-full animate-pulse"></span>
+            {BRANDING.heroTagline}
+          </div>
+          <h2 className="text-5xl md:text-7xl font-extrabold text-[#00245D] mb-6 leading-tight">
+            <span className="text-[#99D6EA]">{BRANDING.portalName}</span>
+          </h2>
+          {/* TODO: Pending final copy from client - update in src/lib/branding.ts */}
+          <p className="text-xl text-[#00245D]/80 mb-10 max-w-2xl mx-auto leading-relaxed">
+            {BRANDING.heroDescription}
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/register" className="group bg-[#00245D] text-white px-8 py-4 rounded-2xl font-semibold text-lg shadow-xl shadow-[#00245D]/25 hover:shadow-2xl hover:shadow-[#00245D]/30 transition-all hover:-translate-y-1 flex items-center justify-center gap-2">
+              {BRANDING.ctaJoin}
+              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+            </Link>
+            <Link href="/login" className="bg-white text-[#00245D] px-8 py-4 rounded-2xl font-semibold text-lg border-2 border-[#00245D] hover:bg-[#00245D] hover:text-white transition-all hover:-translate-y-1">{BRANDING.ctaSignIn}</Link>
+          </div>
+        </div>
+
+        {/* Features */}
+        {/* TODO: Pending final copy from client - update in src/lib/branding.ts */}
+        <div className="grid md:grid-cols-3 gap-6 mt-24 max-w-5xl mx-auto">
+          {LANDING_FEATURES.map((f, i) => (
+            <div key={i} className="group bg-white rounded-3xl p-8 shadow-lg shadow-[#00245D]/10 border border-[#D4C4A8] hover:shadow-xl hover:shadow-[#00245D]/20 transition-all hover:-translate-y-2 animate-fadeIn" style={{ animationDelay: `${i * 0.1}s` }}>
+              <div className={`w-14 h-14 ${f.color} rounded-2xl flex items-center justify-center text-2xl mb-5 shadow-lg group-hover:scale-110 transition-transform`}>{f.icon}</div>
+              <h3 className="text-xl font-bold text-[#00245D] mb-3">{f.title}</h3>
+              <p className="text-[#00245D]/70 leading-relaxed">{f.description}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Stats Section */}
+        <div className="mt-24 bg-[#00245D] rounded-3xl p-10 max-w-4xl mx-auto shadow-2xl shadow-[#00245D]/25">
+          <div className="grid grid-cols-3 gap-8 text-center text-white">
+            {LANDING_STATS.map((s, i) => (
+              <div key={i}><div className="text-4xl font-bold mb-1">{s.number}</div><div className="text-[#99D6EA] text-sm">{s.label}</div></div>
+            ))}
+          </div>
         </div>
       </main>
+
+      {/* Footer */}
+      <footer className="relative z-10 container mx-auto px-6 py-10 text-center">
+        <p className="text-[#00245D]/60">{BRANDING.footerText}</p>
+      </footer>
     </div>
   );
 }
