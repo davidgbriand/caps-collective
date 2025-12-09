@@ -42,47 +42,47 @@ export default function ProfilePage() {
       }
     }
 
-      fetchData();
-      if (userData) {
-        if (userData.displayName) setDisplayName(userData.displayName);
-        if (userData.phoneNumber) setPhoneNumber(userData.phoneNumber);
-        if (userData.bio) setBio(userData.bio);
-        if (userData.location) setLocation(userData.location);
-        if (userData.linkedinUrl) setLinkedinUrl(userData.linkedinUrl);
-        if (userData.profilePhoto) setProfilePhoto(userData.profilePhoto);
-      }
+    fetchData();
+    if (userData) {
+      if (userData.displayName) setDisplayName(userData.displayName);
+      if (userData.phoneNumber) setPhoneNumber(userData.phoneNumber);
+      if (userData.bio) setBio(userData.bio);
+      if (userData.location) setLocation(userData.location);
+      if (userData.linkedinUrl) setLinkedinUrl(userData.linkedinUrl);
+      if (userData.profilePhoto) setProfilePhoto(userData.profilePhoto);
+    }
   }, [user, userData]);
 
-	  const handleUpdateProfile = async (e: React.FormEvent) => {
-	    e.preventDefault();
-	    if (!user) return;
+  const handleUpdateProfile = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!user) return;
 
-	    setSaving(true);
-	    setMessage('');
+    setSaving(true);
+    setMessage('');
 
-	    if (!phoneNumber.trim()) {
-	      setMessage('Phone number is required and cannot be removed');
-	      setSaving(false);
-	      return;
-	    }
+    if (!phoneNumber.trim()) {
+      setMessage('Phone number is required and cannot be removed');
+      setSaving(false);
+      return;
+    }
 
-	    try {
-	      await updateDoc(doc(db, 'users', user.uid), {
-	        displayName,
-	        phoneNumber,
-	        bio,
-	        location,
-	        linkedinUrl,
-	        profilePhoto,
-	        updatedAt: serverTimestamp(),
-	      });
-	      setMessage('Profile updated successfully!');
-	    } catch (error) {
-	      setMessage('Failed to update profile');
-	    } finally {
-	      setSaving(false);
-	    }
-	  };
+    try {
+      await updateDoc(doc(db, 'users', user.uid), {
+        displayName,
+        phoneNumber,
+        bio,
+        location,
+        linkedinUrl,
+        profilePhoto,
+        updatedAt: serverTimestamp(),
+      });
+      setMessage('Profile updated successfully!');
+    } catch (error) {
+      setMessage('Failed to update profile');
+    } finally {
+      setSaving(false);
+    }
+  };
 
   return (
     <ProtectedRoute requireOnboarding>
@@ -200,7 +200,7 @@ export default function ProfilePage() {
               <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg border border-[#D4C4A8] p-6 animate-fadeIn" style={{ animationDelay: '0.1s' }}>
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-lg font-bold text-[#00245D] flex items-center gap-2">⚽ Your Skills <span className="text-sm font-normal text-[#00245D]/60 bg-[#D4C4A8]/50 px-2 py-0.5 rounded-full">{skills.length}</span></h2>
-                  <Link href="/onboarding/skills" className="text-[#00245D] hover:text-[#00245D]/70 text-sm font-semibold flex items-center gap-1">Edit <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg></Link>
+                  <Link href="/profile/skills" className="text-[#00245D] hover:text-[#00245D]/70 text-sm font-semibold flex items-center gap-1">Edit <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg></Link>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {skills.map(skill => (
@@ -214,7 +214,7 @@ export default function ProfilePage() {
               <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg border border-[#D4C4A8] p-6 animate-fadeIn" style={{ animationDelay: '0.2s' }}>
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-lg font-bold text-[#00245D] flex items-center gap-2">🤝 Your Connections <span className="text-sm font-normal text-[#00245D]/60 bg-[#D4C4A8]/50 px-2 py-0.5 rounded-full">{connections.length}</span></h2>
-                  <Link href="/onboarding/connections" className="text-[#00245D] hover:text-[#00245D]/70 text-sm font-semibold flex items-center gap-1">Edit <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg></Link>
+                  <Link href="/profile/connections" className="text-[#00245D] hover:text-[#00245D]/70 text-sm font-semibold flex items-center gap-1">Edit <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg></Link>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {connections.map(conn => (
