@@ -8,26 +8,30 @@
 export const BRANDING = {
   // Portal name
   portalName: 'Caps Collective',
-  
+
   // Organization
   organization: 'Vancouver Whitecaps FC',
-  
+
   // Page titles
   pageTitle: 'Caps Collective - Community Relationship Mapping',
   pageDescription: 'Connect skills, relationships, and community needs',
-  
+
   // Hero section text
   // TODO: Pending final copy from client - update this text when provided
   heroTagline: 'Community-Powered Connections',
-  heroDescription: 'Map skills, relationships, and needs to build stronger community connections. Find the right people for the right opportunities.',
-  
+  heroDescription: `Parents who bring intention, expertise, and meaningful resources
+partner with us to build the most elite high-performance
+pathway in the country—strengthening the environment
+their child relies on to grow and excel.
+"Build Their Future with Us."`,
+
   // Call to action buttons
   ctaJoin: 'Join Caps Collective',
   ctaSignIn: 'Sign In',
-  
+
   // Footer
   footerText: '© 2024 Vancouver Whitecaps FC. All rights reserved.',
-  
+
   // Alt text for logos
   logoAlt: 'Whitecaps FC',
 } as const;

@@ -68,11 +68,11 @@ export default function Home() {
             <span className="w-2 h-2 bg-[#00245D] rounded-full animate-pulse"></span>
             {BRANDING.heroTagline}
           </div>
-          <h2 className="text-5xl md:text-7xl font-extrabold text-[#00245D] mb-6 leading-tight">
+          <h2 className="text-5xl md:text-7xl font-black text-[#00245D] mb-6 leading-tight">
             <span className="text-[#99D6EA]">{BRANDING.portalName}</span>
           </h2>
           {/* TODO: Pending final copy from client - update in src/lib/branding.ts */}
-          <p className="text-xl text-[#00245D]/80 mb-10 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-[#00245D]/80 mb-10 max-w-2xl mx-auto leading-relaxed whitespace-pre-line">
             {BRANDING.heroDescription}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
