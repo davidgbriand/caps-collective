@@ -19,9 +19,9 @@ if (!admin.apps.length) {
  */
 export async function sendFirebaseInvitation(email: string) {
     try {
-        // Use Vercel URL in production, or configured base URL, or localhost for dev
-        const baseUrl = process.env.VERCEL_URL
-            ? `https://${process.env.VERCEL_URL}`
+        // Use Vercel production URL (not preview), or configured base URL, or localhost for dev
+        const baseUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
+            ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
             : process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
 
         const actionCodeSettings = {
