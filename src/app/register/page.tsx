@@ -145,7 +145,7 @@ function RegisterPageContent() {
             <p className="mt-2 text-[#00245D]/60">
               {invitationToken
                 ? 'You\'ve been invited to join the community'
-                : 'Create your account to get started'}
+                : 'Create your profile to get started'}
             </p>
           </div>
 
@@ -266,7 +266,7 @@ function RegisterPageContent() {
               </div>
 
               <button type="submit" disabled={loading} className="w-full py-4 bg-[#00245D] text-white rounded-xl font-semibold shadow-lg shadow-[#00245D]/25 hover:shadow-xl hover:shadow-[#00245D]/30 hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 mt-2">
-                {loading ? <span className="flex items-center justify-center gap-2"><span className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></span>Creating account...</span> : 'Create account'}
+                {loading ? <span className="flex items-center justify-center gap-2"><span className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></span>Joining...</span> : 'Join the Collective'}
               </button>
             </form>
           )}

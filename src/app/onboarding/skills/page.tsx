@@ -28,7 +28,7 @@ export default function SkillsOnboardingPage() {
   const { user } = useAuth();
   const router = useRouter();
   const [skills, setSkills] = useState<SkillEntry[]>([
-    { category: 'Trades', skillName: '', willingnessLevel: 'advice', isHobby: false }
+    { category: 'Sports & Coaching', skillName: '', willingnessLevel: 'advice', isHobby: false }
   ]);
   const [deletedIds, setDeletedIds] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
@@ -64,7 +64,7 @@ export default function SkillsOnboardingPage() {
   }, [user]);
 
   const addSkillEntry = () => {
-    setSkills([...skills, { category: 'Trades', skillName: '', willingnessLevel: 'advice', isHobby: false }]);
+    setSkills([...skills, { category: 'Sports & Coaching', skillName: '', willingnessLevel: 'advice', isHobby: false }]);
   };
 
   const removeSkillEntry = (index: number) => {
@@ -77,7 +77,7 @@ export default function SkillsOnboardingPage() {
       setSkills(skills.filter((_, i) => i !== index));
     } else if (skills.length === 1 && skillToRemove.id) {
       // If it's the last one and has ID, remove it and replace with empty
-      setSkills([{ category: 'Trades', skillName: '', willingnessLevel: 'advice', isHobby: false }]);
+      setSkills([{ category: 'Sports & Coaching', skillName: '', willingnessLevel: 'advice', isHobby: false }]);
     }
   };
 
@@ -155,7 +155,7 @@ export default function SkillsOnboardingPage() {
             <div className="mb-8">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-[#00245D] rounded-xl flex items-center justify-center text-white text-xl shadow-lg">⚽</div>
+                  <div className="w-12 h-12 bg-[#00245D] rounded-xl flex items-center justify-center text-white text-xl shadow-lg">🔧</div>
                   <h1 className="text-2xl font-bold text-[#00245D]">What skills do you bring?</h1>
                 </div>
                 <span className="text-sm text-[#00245D]/60 bg-[#D4C4A8]/50 px-3 py-1 rounded-full">Step 1 of 2</span>
@@ -178,16 +178,48 @@ export default function SkillsOnboardingPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-[#00245D] mb-1.5">Category</label>
-                      <select value={skill.category} onChange={(e) => updateSkillEntry(index, 'category', e.target.value)} className="w-full px-4 py-3 border-2 border-[#D4C4A8] rounded-xl focus:outline-none focus:border-[#00245D] transition-colors bg-white">
-                        {SKILL_CATEGORIES.map((cat) => <option key={cat} value={cat}>{cat}</option>)}
-                      </select>
+                      <div className="relative">
+                        <select
+                          value={skill.category}
+                          onChange={(e) => updateSkillEntry(index, 'category', e.target.value)}
+                          className="w-full pl-4 pr-10 py-3 border-2 border-[#D4C4A8] rounded-xl focus:outline-none focus:border-[#00245D] transition-colors bg-white appearance-none text-[#00245D]"
+                        >
+                          {SKILL_CATEGORIES.map((cat) => <option key={cat} value={cat}>{cat}</option>)}
+                        </select>
+                        <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-[#00245D]">
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                          </svg>
+                        </div>
+                      </div>
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-[#00245D] mb-1.5">Skill</label>
-                      <select value={skill.skillName} onChange={(e) => updateSkillEntry(index, 'skillName', e.target.value)} className="w-full px-4 py-3 border-2 border-[#D4C4A8] rounded-xl focus:outline-none focus:border-[#00245D] transition-colors bg-white">
-                        <option value="">Select a skill...</option>
-                        {SKILLS_BY_CATEGORY[skill.category].map((s) => <option key={s} value={s}>{s}</option>)}
-                      </select>
+                      {skill.category === 'Other' ? (
+                        <input
+                          type="text"
+                          value={skill.skillName}
+                          onChange={(e) => updateSkillEntry(index, 'skillName', e.target.value)}
+                          placeholder="Type your skill here..."
+                          className="w-full px-4 py-3 border-2 border-[#D4C4A8] rounded-xl focus:outline-none focus:border-[#00245D] transition-colors bg-white text-[#00245D] placeholder-[#00245D]/40"
+                        />
+                      ) : (
+                        <div className="relative">
+                          <select
+                            value={skill.skillName}
+                            onChange={(e) => updateSkillEntry(index, 'skillName', e.target.value)}
+                            className="w-full pl-4 pr-10 py-3 border-2 border-[#D4C4A8] rounded-xl focus:outline-none focus:border-[#00245D] transition-colors bg-white appearance-none text-[#00245D]"
+                          >
+                            <option value="">Select a skill...</option>
+                            {SKILLS_BY_CATEGORY[skill.category]?.map((s) => <option key={s} value={s}>{s}</option>)}
+                          </select>
+                          <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-[#00245D]">
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
 

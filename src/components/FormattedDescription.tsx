@@ -34,7 +34,7 @@ export default function FormattedDescription({ text, className = '' }: Formatted
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                     {keyValuePairs.map((pair, i) => (
                                         <div key={i} className="bg-white rounded-lg p-3 border border-[#D4C4A8]/50 shadow-sm">
-                                            <span className="text-xs font-semibold text-[#00245D]/60 uppercase tracking-wide">{pair.label}</span>
+                                            <span className="text-xs font-bold text-[#00245D] uppercase tracking-wider bg-[#99D6EA]/20 px-2 py-0.5 rounded-md inline-block mb-1">{getDisplayTitle(pair.label)}</span>
                                             <p className="text-sm text-[#00245D] mt-0.5 font-medium leading-relaxed">{pair.value}</p>
                                         </div>
                                     ))}
@@ -94,13 +94,16 @@ function Section({ content }: { content: string }) {
     // Get icon based on title
     const icon = getSectionIcon(title);
 
+    // Map legacy titles to new user-friendly titles
+    const displayTitle = getDisplayTitle(title);
+
     return (
         <div className="rounded-xl border border-[#D4C4A8] overflow-hidden shadow-sm">
             {/* Section Header */}
             <div className="bg-[#00245D] text-white px-5 py-3">
-                <h4 className="font-semibold text-base flex items-center gap-2">
-                    <span>{icon}</span>
-                    {title}
+                <h4 className="font-bold text-lg flex items-center gap-2 tracking-wide">
+                    <span className="bg-white/20 p-1 rounded-md">{getSectionIcon(displayTitle)}</span>
+                    {displayTitle}
                 </h4>
             </div>
 
@@ -116,6 +119,22 @@ function Section({ content }: { content: string }) {
             </div>
         </div>
     );
+}
+
+// Map specific titles to new values
+function getDisplayTitle(originalTitle: string): string {
+    const normalized = originalTitle.trim().toUpperCase();
+
+    // Check for "TARGET WINDOW" or similar
+    if (normalized.includes('TARGET WINDOW')) return 'Timeframe';
+
+    // Check for "TARGET STRENGTH" or similar
+    if (normalized.includes('TARGET STRENGTH')) return 'Skills + Connections + Equipment';
+
+    // Check for "DETAILED WRITTEN QUOTE" or similar
+    if (normalized.includes('DETAILED WRITTEN QUOTE')) return 'Budget';
+
+    return originalTitle;
 }
 
 // Render numbered items with their sub-bullets
@@ -190,9 +209,11 @@ function getSectionIcon(title: string): string {
     if (lowerTitle.includes('requirement')) return '📝';
     if (lowerTitle.includes('deliverable')) return '📦';
     if (lowerTitle.includes('experience')) return '🏆';
-    if (lowerTitle.includes('schedule') || lowerTitle.includes('timeline')) return '📅';
+    if (lowerTitle.includes('schedule') || lowerTitle.includes('timeline') || lowerTitle.includes('timeframe')) return '📅';
     if (lowerTitle.includes('site') || lowerTitle.includes('location')) return '📍';
     if (lowerTitle.includes('additional') || lowerTitle.includes('info')) return 'ℹ️';
+    if (lowerTitle.includes('budget')) return '💰';
+    if (lowerTitle.includes('skills')) return '💪';
 
     return '📋';
 }

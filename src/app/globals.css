@@ -32,7 +32,7 @@
   --shadow-sm: 0 1px 2px 0 rgb(0 36 93 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 36 93 / 0.1), 0 2px 4px -2px rgb(0 36 93 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 36 93 / 0.1), 0 4px 6px -4px rgb(0 36 93 / 0.1);
-  --shadow-glow: 0 0 20px rgba(0, 36, 93, 0.15);
+  --shadow-glow: 0 0 20px rgba(148, 194, 224, 0.5);
 }
 
 @theme inline {
@@ -47,17 +47,23 @@
   --color-wfc-tan: #D4C4A8;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
-  background: var(--wfc-tan);
   color: var(--foreground);
   font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
   min-height: 100vh;
 }
 
 /* Typography - Headers use Obviously/Montserrat Heavy Bold */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Montserrat', system-ui, sans-serif;
   font-weight: 800;
 }
@@ -69,69 +75,250 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Modern Card Styles */
-.card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; box-shadow: var(--shadow-md); transition: all 0.3s ease; }
-.card:hover { box-shadow: var(--shadow-lg), var(--shadow-glow); transform: translateY(-2px); }
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+  transform: translateY(-2px);
+}
 
 /* Glassmorphism */
-.glass { background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--glass-border); }
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+}
 
 /* Modern Button Styles - Whitecaps Brand */
-.btn-primary { background: linear-gradient(135deg, var(--wfc-navy) 0%, var(--wfc-navy-dark) 100%); color: white; border: none; border-radius: 12px; padding: 12px 24px; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 14px 0 rgba(0, 36, 93, 0.39); }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 36, 93, 0.5); }
-.btn-primary:active { transform: translateY(0); }
+.btn-primary {
+  background: linear-gradient(135deg, var(--wfc-navy) 0%, var(--wfc-navy-dark) 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px 0 rgba(0, 36, 93, 0.39);
+}
 
-.btn-secondary { background: white; color: var(--wfc-navy); border: 2px solid var(--wfc-navy); border-radius: 12px; padding: 10px 22px; font-weight: 600; transition: all 0.3s ease; }
-.btn-secondary:hover { background: var(--wfc-navy); color: white; }
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 36, 93, 0.5);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: white;
+  color: var(--wfc-navy);
+  border: 2px solid var(--wfc-navy);
+  border-radius: 12px;
+  padding: 10px 22px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--wfc-navy);
+  color: white;
+}
 
 /* Light Blue Button Variant */
-.btn-accent { background: linear-gradient(135deg, var(--wfc-blue) 0%, var(--wfc-blue-dark) 100%); color: var(--wfc-navy); border: none; border-radius: 12px; padding: 12px 24px; font-weight: 600; transition: all 0.3s ease; }
-.btn-accent:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(153, 214, 234, 0.5); }
+.btn-accent {
+  background: linear-gradient(135deg, var(--wfc-blue) 0%, var(--wfc-blue-dark) 100%);
+  color: var(--wfc-navy);
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-accent:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(153, 214, 234, 0.5);
+}
 
 /* Modern Input Styles */
-.input-modern { background: white; border: 2px solid var(--wfc-tan-dark); border-radius: 12px; padding: 12px 16px; transition: all 0.3s ease; width: 100%; }
-.input-modern:focus { outline: none; border-color: var(--wfc-navy); box-shadow: 0 0 0 4px rgba(0, 36, 93, 0.1); }
+.input-modern {
+  background: white;
+  border: 2px solid var(--wfc-tan-dark);
+  border-radius: 12px;
+  padding: 12px 16px;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.input-modern:focus {
+  outline: none;
+  border-color: var(--wfc-navy);
+  box-shadow: 0 0 0 4px rgba(0, 36, 93, 0.1);
+}
 
 /* Gradient Text - Whitecaps Brand */
-.gradient-text { background: linear-gradient(135deg, var(--wfc-navy) 0%, var(--wfc-blue) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.gradient-text {
+  background: linear-gradient(135deg, var(--wfc-navy) 0%, var(--wfc-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
 /* Strength Meter Colors */
-.strength-5 { background: linear-gradient(90deg, #10b981, #059669); }
-.strength-4 { background: linear-gradient(90deg, #22c55e, #16a34a); }
-.strength-3 { background: linear-gradient(90deg, #eab308, #ca8a04); }
-.strength-2 { background: linear-gradient(90deg, #f97316, #ea580c); }
-.strength-1 { background: linear-gradient(90deg, #ef4444, #dc2626); }
+.strength-5 {
+  background: linear-gradient(90deg, #10b981, #059669);
+}
+
+.strength-4 {
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+
+.strength-3 {
+  background: linear-gradient(90deg, #eab308, #ca8a04);
+}
+
+.strength-2 {
+  background: linear-gradient(90deg, #f97316, #ea580c);
+}
+
+.strength-1 {
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+}
 
 /* Smooth Animations */
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
-@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
-.animate-fadeIn { animation: fadeIn 0.5s ease-out; }
-.animate-slideIn { animation: slideIn 0.4s ease-out; }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slideIn {
+  animation: slideIn 0.4s ease-out;
+}
 
 /* Category Badge Colors - Whitecaps themed */
-.badge-technology { background: linear-gradient(135deg, var(--wfc-navy), var(--wfc-navy-dark)); }
-.badge-trades { background: linear-gradient(135deg, var(--wfc-blue), var(--wfc-blue-dark)); }
-.badge-media { background: linear-gradient(135deg, var(--wfc-navy-light), var(--wfc-navy)); }
-.badge-legal { background: linear-gradient(135deg, var(--wfc-navy), var(--wfc-navy-light)); }
-.badge-finance { background: linear-gradient(135deg, #10b981, #059669); }
-.badge-healthcare { background: linear-gradient(135deg, #ef4444, #dc2626); }
-.badge-education { background: linear-gradient(135deg, var(--wfc-blue-dark), var(--wfc-blue)); }
-.badge-realestate { background: linear-gradient(135deg, var(--wfc-tan-dark), var(--wfc-tan)); }
+.badge-technology {
+  background: linear-gradient(135deg, var(--wfc-navy), var(--wfc-navy-dark));
+}
+
+.badge-trades {
+  background: linear-gradient(135deg, var(--wfc-blue), var(--wfc-blue-dark));
+}
+
+.badge-media {
+  background: linear-gradient(135deg, var(--wfc-navy-light), var(--wfc-navy));
+}
+
+.badge-legal {
+  background: linear-gradient(135deg, var(--wfc-navy), var(--wfc-navy-light));
+}
+
+.badge-finance {
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.badge-healthcare {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.badge-education {
+  background: linear-gradient(135deg, var(--wfc-blue-dark), var(--wfc-blue));
+}
+
+.badge-realestate {
+  background: linear-gradient(135deg, var(--wfc-tan-dark), var(--wfc-tan));
+}
 
 /* Scrollbar Styling - Whitecaps themed */
-::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: var(--wfc-tan-light); border-radius: 4px; }
-::-webkit-scrollbar-thumb { background: var(--wfc-tan-dark); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: var(--wfc-navy-light); }
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--wfc-tan-light);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--wfc-tan-dark);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--wfc-navy-light);
+}
 
 /* Whitecaps Brand Utilities */
-.bg-wfc-navy { background-color: var(--wfc-navy); }
-.bg-wfc-blue { background-color: var(--wfc-blue); }
-.bg-wfc-tan { background-color: var(--wfc-tan); }
-.text-wfc-navy { color: var(--wfc-navy); }
-.text-wfc-blue { color: var(--wfc-blue); }
-.border-wfc-navy { border-color: var(--wfc-navy); }
-.border-wfc-blue { border-color: var(--wfc-blue); }
+.bg-wfc-navy {
+  background-color: var(--wfc-navy);
+}
+
+.bg-wfc-blue {
+  background-color: var(--wfc-blue);
+}
+
+.bg-wfc-tan {
+  background-color: var(--wfc-tan);
+}
+
+.text-wfc-navy {
+  color: var(--wfc-navy);
+}
+
+.text-wfc-blue {
+  color: var(--wfc-blue);
+}
+
+.border-wfc-navy {
+  border-color: var(--wfc-navy);
+}
+
+.border-wfc-blue {
+  border-color: var(--wfc-blue);
+}
 
 /* Slogan styling */
 .slogan {
@@ -145,7 +332,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Patterned Background */
 .bg-pattern {
   position: relative;
-  background-color: #D4C4A8;
+  background-color: transparent;
 }
 
 .bg-pattern::before {
@@ -155,11 +342,10 @@ h1, h2, h3, h4, h5, h6 {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('/tan-pattern-background-new.png');
-  background-repeat: repeat;
-  background-size: 400px 400px;
-  mix-blend-mode: multiply;
-  opacity: 0.5;
+  background-image: url('/caps-background.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   pointer-events: none;
-  z-index: 0;
+  z-index: -1;
 }

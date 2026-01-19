@@ -26,7 +26,7 @@ export default function Home() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-pattern">
-        <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#99D6EA] border-t-[#00245D]"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#94C2E0] border-t-[#00245D]"></div>
       </div>
     );
   }
@@ -35,9 +35,9 @@ export default function Home() {
     <div className="min-h-screen overflow-hidden bg-pattern">
       {/* Decorative Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-[#99D6EA] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+        <div className="absolute top-20 left-10 w-72 h-72 bg-[#94C2E0] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
         <div className="absolute top-40 right-10 w-96 h-96 bg-[#00245D] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-[#99D6EA] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-[#94C2E0] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
 
       {/* Navigation */}
@@ -64,12 +64,12 @@ export default function Home() {
             />
           </div>
 
-          <div className="inline-flex items-center gap-2 bg-white/80 text-[#00245D] px-4 py-2 rounded-full text-sm font-medium mb-6 border border-[#99D6EA]">
+          <div className="inline-flex items-center gap-2 bg-white/80 text-[#00245D] px-4 py-2 rounded-full text-sm font-medium mb-6 border border-[#94C2E0]">
             <span className="w-2 h-2 bg-[#00245D] rounded-full animate-pulse"></span>
             {BRANDING.heroTagline}
           </div>
           <h2 className="text-5xl md:text-7xl font-black text-[#00245D] mb-6 leading-tight">
-            <span className="text-[#99D6EA]">{BRANDING.portalName}</span>
+            <span className="text-[#94C2E0] drop-shadow-[0_2px_4px_rgba(0,36,93,0.5)]">{BRANDING.portalName}</span>
           </h2>
           {/* TODO: Pending final copy from client - update in src/lib/branding.ts */}
           <p className="text-xl text-[#00245D]/80 mb-10 max-w-2xl mx-auto leading-relaxed whitespace-pre-line">
@@ -88,7 +88,7 @@ export default function Home() {
         {/* TODO: Pending final copy from client - update in src/lib/branding.ts */}
         <div className="grid md:grid-cols-3 gap-6 mt-24 max-w-5xl mx-auto">
           {LANDING_FEATURES.map((f, i) => (
-            <div key={i} className="group bg-white rounded-3xl p-8 shadow-lg shadow-[#00245D]/10 border border-[#D4C4A8] hover:shadow-xl hover:shadow-[#00245D]/20 transition-all hover:-translate-y-2 animate-fadeIn" style={{ animationDelay: `${i * 0.1}s` }}>
+            <div key={i} className="group bg-white rounded-3xl p-8 shadow-lg shadow-[#00245D]/10 border border-[#D4C4A8] hover:shadow-xl hover:shadow-[#94C2E0]/60 transition-all hover:-translate-y-2 animate-fadeIn" style={{ animationDelay: `${i * 0.1}s` }}>
               <div className={`w-14 h-14 ${f.color} rounded-2xl flex items-center justify-center text-2xl mb-5 shadow-lg group-hover:scale-110 transition-transform`}>{f.icon}</div>
               <h3 className="text-xl font-bold text-[#00245D] mb-3">{f.title}</h3>
               <p className="text-[#00245D]/70 leading-relaxed">{f.description}</p>
@@ -100,7 +100,7 @@ export default function Home() {
         <div className="mt-24 bg-[#00245D] rounded-3xl p-10 max-w-4xl mx-auto shadow-2xl shadow-[#00245D]/25">
           <div className="grid grid-cols-3 gap-8 text-center text-white">
             {LANDING_STATS.map((s, i) => (
-              <div key={i}><div className="text-4xl font-bold mb-1">{s.number}</div><div className="text-[#99D6EA] text-sm">{s.label}</div></div>
+              <div key={i}><div className="text-4xl font-bold mb-1">{s.number}</div><div className="text-[#94C2E0] text-sm">{s.label}</div></div>
             ))}
           </div>
         </div>

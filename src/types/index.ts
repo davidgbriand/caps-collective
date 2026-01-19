@@ -5,24 +5,29 @@ export type WillingnessLevel = 'pro_bono' | 'sponsor' | 'discount' | 'advice' | 
 export type RelationshipStrength = 'decision_maker' | 'strong_contact' | 'acquaintance';
 
 // Skill categories
+// Skill categories
 export const SKILL_CATEGORIES = [
   'Sports & Coaching',
-  'Youth Development',
-  'Event Planning',
-  'Facilities & Equipment',
-  'Education',
-  'Healthcare',
-  'Technology',
-  'Media',
-  'Marketing',
-  'Finance',
-  'Legal',
-  'Trades',
-  'Real Estate',
-  'Consulting',
-  'Arts & Entertainment',
-  'Non-Profit',
-  'Government',
+  'Education & Youth Development',
+  'Event Planning & Community Outreach',
+  'Facilities, Construction & Equipment',
+  'Trades & Skilled Labour (Extended)',
+  'Real Estate & Property Services',
+  'Technology & Software',
+  'Media, Photography & Videography',
+  'Marketing, Branding & Communications',
+  'Finance, Accounting & Insurance',
+  'Legal & Compliance',
+  'Healthcare & Wellness',
+  'Consulting & Professional Services',
+  'Arts, Entertainment & Creative',
+  'Government, Public Sector & Politics (Extended)',
+  'Business Owners & Entrepreneurs',
+  'Non-Profit & Philanthropy',
+  'Sales, Partnerships & Fundraising',
+  'Logistics, Transportation & Operations',
+  'Hospitality & Food Services',
+  'Retail, E-Commerce & Merchandising',
   'Other'
 ] as const;
 
@@ -30,24 +35,28 @@ export type SkillCategory = typeof SKILL_CATEGORIES[number];
 
 // Skills by category
 export const SKILLS_BY_CATEGORY: Record<SkillCategory, string[]> = {
-  'Sports & Coaching': ['Soccer Coaching', 'Referee/Officiating', 'Athletic Training', 'Sports Medicine', 'Fitness Training', 'Team Management', 'Sports Psychology'],
-  'Youth Development': ['Mentoring', 'Leadership Training', 'Character Development', 'Life Skills', 'Academic Support', 'Career Guidance', 'Conflict Resolution'],
-  'Event Planning': ['Tournament Organization', 'Game Day Operations', 'Fundraising Events', 'Team Parties', 'Award Ceremonies', 'Travel Coordination', 'Venue Management'],
-  'Facilities & Equipment': ['Field Maintenance', 'Equipment Management', 'Facility Setup', 'Safety Inspections', 'Groundskeeping', 'Equipment Repair', 'Inventory Management'],
-  'Education': ['Tutoring', 'College Counseling', 'Professional Training', 'Language Instruction', 'Early Childhood', 'Special Education', 'STEM Education'],
-  'Healthcare': ['Medical', 'Dental', 'Mental Health', 'Physical Therapy', 'Nursing', 'Pharmacy', 'Nutrition', 'Sports Medicine'],
-  'Technology': ['Web Development', 'Mobile Apps', 'IT Support', 'Cybersecurity', 'Data Analytics', 'AI/ML', 'Cloud Services', 'Video Streaming'],
-  'Media': ['Video Production', 'Photography', 'Graphic Design', 'Social Media', 'PR/Communications', 'Journalism', 'Podcasting', 'Live Streaming'],
-  'Marketing': ['Digital Marketing', 'SEO/SEM', 'Branding', 'Copywriting', 'Email Marketing', 'Market Research', 'Sponsorship', 'Community Outreach'],
-  'Finance': ['Accounting', 'Tax Preparation', 'Financial Planning', 'Investment', 'Banking', 'Insurance', 'Bookkeeping', 'Fundraising'],
-  'Legal': ['Corporate Law', 'Real Estate Law', 'Family Law', 'Immigration', 'Criminal Defense', 'Intellectual Property', 'Contracts', 'Sports Law'],
-  'Trades': ['Plumbing', 'Electrical', 'HVAC', 'Carpentry', 'Roofing', 'Landscaping', 'General Contractor', 'Painting'],
-  'Real Estate': ['Residential Sales', 'Commercial Sales', 'Property Management', 'Appraisal', 'Mortgage', 'Title Services'],
-  'Consulting': ['Business Strategy', 'HR/Recruiting', 'Operations', 'Change Management', 'Project Management', 'Organizational Development'],
-  'Arts & Entertainment': ['Music', 'Acting', 'Writing', 'Visual Arts', 'Dance', 'Catering', 'Entertainment', 'Performance'],
-  'Non-Profit': ['Fundraising', 'Grant Writing', 'Volunteer Management', 'Program Development', 'Board Governance', 'Community Engagement'],
-  'Government': ['Lobbying', 'Policy', 'Community Relations', 'Licensing/Permits', 'Public Affairs', 'Municipal Services'],
-  'Other': ['Translation', 'Research', 'Personal Services', 'Transportation', 'Childcare', 'Pet Services', 'Administrative Support']
+  'Sports & Coaching': ['Youth sports expertise', 'Coaching experience', 'Player development insight', 'Fitness training', 'Scouting', 'Analysis', 'Referee skills'],
+  'Education & Youth Development': ['Teachers', 'Professors', 'Tutors', 'Early childhood specialists', 'Curriculum designers', 'Academic advisors', 'Leadership development', 'Mentorship'],
+  'Event Planning & Community Outreach': ['Event planners', 'Coordinators', 'Festival organizers', 'Community engagement', 'Volunteer management', 'Venue planning', 'Logistics for large events'],
+  'Facilities, Construction & Equipment': ['General contractors', 'Project managers', 'Facility maintenance', 'Turf installation', 'Carpentry', 'Roofing', 'Concrete', 'Landscaping', 'Excavation', 'Fencing', 'Snow removal', 'Equipment installation', 'Renovation specialists'],
+  'Trades & Skilled Labour (Extended)': ['Electricians', 'Plumbers', 'HVAC technicians', 'Concrete specialists', 'Forming', 'Framing', 'Roofing', 'Siding', 'Drywall', 'Flooring', 'Millwork', 'Cabinetry', 'Welding', 'Fabrication', 'Machining', 'Steelworkers', 'Heavy equipment operators', 'Landscapers', 'Irrigation techs', 'Snow removal crews', 'Asphalt', 'Fencing', 'Turf installation', 'Signage mounting', 'Window installers', 'Door installers', 'Insulation', 'Demolition teams', 'General labourers', 'Site services'],
+  'Real Estate & Property Services': ['Realtors', 'Builders', 'Developers', 'Appraisers', 'Inspectors', 'Property managers', 'Commercial leasing', 'Zoning guidance', 'Architects', 'Land surveyors'],
+  'Technology & Software': ['IT support', 'Cybersecurity', 'Software developers', 'Web designers', 'App builders', 'Database architects', 'Cloud systems', 'Network engineers', 'AV installation'],
+  'Media, Photography & Videography': ['Photographers', 'Videographers', 'Editors', 'Drone operators', 'Storytellers', 'Documentary producers', 'Sports media professionals'],
+  'Marketing, Branding & Communications': ['Graphic designers', 'Brand strategists', 'PR professionals', 'Social media managers', 'Storytellers', 'Copywriters', 'Advertisers', 'Media buyers', 'Print design', 'Campaign development'],
+  'Finance, Accounting & Insurance': ['Accountants', 'Financial planners', 'Auditors', 'Payroll specialists', 'Bookkeepers', 'Banking', 'Insurance brokers', 'Investment professionals'],
+  'Legal & Compliance': ['Lawyers', 'Paralegals', 'Contract specialists', 'Risk managers', 'Policy advisors', 'HR compliance', 'Child safety compliance'],
+  'Healthcare & Wellness': ['Doctors', 'Nurses', 'Physiotherapists', 'Chiropractors', 'RMTs', 'Sports medicine providers', 'Nutritionists', 'Mental performance coaches', 'Counselors', 'Psychologists'],
+  'Consulting & Professional Services': ['Business consultants', 'Process improvement', 'Operational efficiency', 'HR specialists', 'Leadership coaching', 'Management consultants'],
+  'Arts, Entertainment & Creative': ['Illustrators', 'Designers', 'Musicians', 'Animators', 'Set designers', 'Creative directors', 'Fashion designers', 'Costume makers', 'Performers'],
+  'Government, Public Sector & Politics (Extended)': ['Political staffers', 'Municipal/provincial/federal government contacts', 'MP/MPP/Councillor connections', 'Campaign workers', 'Public servants', 'Policy advisors', 'School board contacts', 'Community advocates', 'Grant coordinators', 'Communications officers', 'Regulatory experts', 'Access to political offices', 'Advocacy networks'],
+  'Business Owners & Entrepreneurs': ['Owners/operators of any type of business', 'Service providers', 'Manufacturers', 'Restaurateurs', 'Distributors', 'Franchise owners', 'Retail owners', 'Founders'],
+  'Non-Profit & Philanthropy': ['Charity leaders', 'Fundraisers', 'Grant writers', 'Board members', 'Foundation contacts', 'Sponsorship connectors'],
+  'Sales, Partnerships & Fundraising': ['Sales professionals', 'Corporate partnerships', 'Sponsorship acquisition', 'Donor relations', 'Fundraising strategy', 'Business development'],
+  'Logistics, Transportation & Operations': ['Truck drivers', 'Delivery services', 'Fleet operators', 'Warehouse managers', 'Supply chain experts', 'Inventory management', 'Operations specialists'],
+  'Hospitality & Food Services': ['Restaurant owners', 'Caterers', 'Chefs', 'Bakers', 'Event hospitality providers', 'Venue operators', 'Wholesale food suppliers'],
+  'Retail, E-Commerce & Merchandising': ['Retail managers', 'Buyers', 'E-commerce operators', 'Product designers', 'Apparel makers', 'Shipping/fulfillment professionals'],
+  'Other': []
 };
 
 // Connection sectors

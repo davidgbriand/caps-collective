@@ -457,7 +457,8 @@ export default function NeedDetailPage() {
                   {matches.map((match, index) => (
                     <div
                       key={match.userId}
-                      className="bg-white/95 backdrop-blur-sm rounded-2xl p-5 border border-[#D4C4A8] shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 flex items-center justify-between animate-fadeIn"
+                      onClick={() => router.push(`/users/${match.userId}`)}
+                      className="bg-white/95 backdrop-blur-sm rounded-2xl p-5 border border-[#D4C4A8] shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 flex items-center justify-between animate-fadeIn cursor-pointer"
                       style={{ animationDelay: `${index * 0.05}s` }}
                     >
                       <div className="flex items-center gap-4">

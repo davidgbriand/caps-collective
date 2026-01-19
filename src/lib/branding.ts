@@ -30,7 +30,7 @@ their child relies on to grow and excel.
   ctaSignIn: 'Sign In',
 
   // Footer
-  footerText: '© 2024 Vancouver Whitecaps FC. All rights reserved.',
+  footerText: '© 2025 Whitecaps London. All rights reserved.',
 
   // Alt text for logos
   logoAlt: 'Whitecaps FC',
@@ -59,10 +59,11 @@ export const LANDING_FEATURES = [
   },
 ] as const;
 
-// Stats displayed on landing page
+// Stats displayed on landing page (currently showing goals, not real-time data)
+// TODO: Add admin toggle to switch between "Goals" and "Real Stats"
 export const LANDING_STATS = [
-  { number: '500+', label: 'Community Members' },
-  { number: '1,200+', label: 'Skills Mapped' },
-  { number: '300+', label: 'Connections Made' },
+  { number: '1,500+', label: 'Community Members' },
+  { number: '3,500+', label: 'Skills Mapped' },
+  { number: '175+', label: 'Connections Made' },
 ] as const;
 
