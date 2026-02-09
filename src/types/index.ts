@@ -238,6 +238,7 @@ export interface UserWithStats {
   madeAdminBy?: string;
   onboardingComplete: boolean;
   createdAt: Date;
+  updatedAt: Date;
   skillsCount: number;
   connectionsCount: number;
   invitationId?: string;
