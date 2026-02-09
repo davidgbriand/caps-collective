@@ -43,3 +43,9 @@ next-env.d.ts
 # Firebase credentials
 *-firebase-adminsdk-*.json
 firebase-key.json
+.tmp/
+.env
+credentials.json
+token.json
+__pycache__/
+*.pyc
