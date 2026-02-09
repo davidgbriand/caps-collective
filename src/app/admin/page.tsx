@@ -23,7 +23,9 @@ import {
 
 type TabType = 'needs' | 'invitations' | 'users' | 'analytics' | 'scoring' | 'settings';
 
-export default function AdminDashboardPage() {
+import { Suspense } from 'react';
+
+function AdminDashboardContent() {
   const { user } = useAuth();
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState<TabType>('analytics');
@@ -2579,5 +2581,13 @@ export default function AdminDashboardPage() {
         </div>
       )}
     </ProtectedRoute >
+  );
+}
+
+export default function AdminDashboardPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-4 border-[#00245D] border-t-transparent"></div></div>}>
+      <AdminDashboardContent />
+    </Suspense>
   );
 }
