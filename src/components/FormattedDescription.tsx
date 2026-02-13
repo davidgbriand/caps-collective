@@ -1,0 +1,223 @@
+'use client';
+
+interface FormattedDescriptionProps {
+    text: string;
+    className?: string;
+}
+
+/**
+ * Cleanly formats project descriptions with proper sections and lists
+ */
+export default function FormattedDescription({ text, className = '' }: FormattedDescriptionProps) {
+    if (!text) return null;
+
+    // Split by the "——" separator which marks different sections
+    const sections = text.split(/\s*——\s*/).filter(s => s.trim());
+
+    return (
+        <div className={`space-y-6 ${className}`}>
+            {sections.map((section, sectionIndex) => {
+                const trimmed = section.trim();
+
+                // First section (before any ——) contains key info
+                if (sectionIndex === 0) {
+                    // Parse key-value pairs like "Project Location: value" or "Timeline: value"
+                    const keyValuePairs = parseKeyValuePairs(trimmed);
+
+                    if (keyValuePairs.length > 0) {
+                        return (
+                            <div key={sectionIndex} className="glass-panel !bg-[#00245D]/5 p-6 border border-white/20">
+                                <h4 className="text-sm font-bold text-[#00245D] uppercase tracking-wide mb-5 flex items-center gap-2">
+                                    <span className="w-6 h-6 bg-[#00245D] rounded flex items-center justify-center text-white text-xs">📋</span>
+                                    Key Information
+                                </h4>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {keyValuePairs.map((pair, i) => (
+                                        <div key={i} className="bg-white/40 rounded-xl p-4 border border-white/40 shadow-sm hover:bg-white/60 transition-colors">
+                                            <span className="text-[10px] font-bold text-[#00245D]/60 uppercase tracking-wider block mb-1">{getDisplayTitle(pair.label)}</span>
+                                            <p className="text-sm font-bold text-[#00245D] leading-relaxed">{pair.value}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        );
+                    }
+
+                    // If no key-value pairs, just render as intro paragraph
+                    return (
+                        <div key={sectionIndex} className="glass-panel !bg-[#D4C4A8]/10 p-6 border border-[#D4C4A8]/20">
+                            <p className="text-[#00245D]/80 leading-relaxed text-lg font-medium">{trimmed}</p>
+                        </div>
+                    );
+                }
+
+                // Other sections have a title followed by content
+                return <Section key={sectionIndex} content={trimmed} />;
+            })}
+        </div>
+    );
+}
+
+// Parse "Label: Value" patterns from text
+function parseKeyValuePairs(text: string): Array<{ label: string; value: string }> {
+    const pairs: Array<{ label: string; value: string }> = [];
+
+    // Match patterns like "Project Location: some value" or "Timeline: some value"
+    const regex = /([A-Za-z][A-Za-z\s]+?):\s*([^:]+?)(?=\s+[A-Z][A-Za-z\s]+?:|$)/g;
+    let match;
+
+    while ((match = regex.exec(text)) !== null) {
+        if (match[1] && match[2]) {
+            pairs.push({
+                label: match[1].trim(),
+                value: match[2].trim(),
+            });
+        }
+    }
+
+    return pairs;
+}
+
+// Section component to handle different section types
+function Section({ content }: { content: string }) {
+    // Extract section title
+    // First try known multi-word section titles that appear in the creation form
+    const knownTitleMatch = content.match(/^(Project Overview|Scope of Work|Additional Information|Requirements)(?:\s+)/);
+    // Then fall back to generic pattern (words before numbered items or bullets)
+    const genericTitleMatch = !knownTitleMatch ? content.match(/^([A-Za-z][A-Za-z\s&]+?)(?=\s+\d+\.|\s+[·•]|\s*$)/) : null;
+    const titleMatch = knownTitleMatch || genericTitleMatch;
+    const title = titleMatch ? titleMatch[1].trim() : 'Details';
+    const restContent = titleMatch ? content.slice(titleMatch[0].length).trim() : content;
+
+    // Check if content has numbered items (1. item, 2. item)
+    const hasNumberedItems = /\d+\.\s/.test(restContent);
+
+    // Check if content has bullet items (· or • separated)
+    const hasBulletItems = /[·•]/.test(restContent);
+
+    // Get icon based on title
+    const icon = getSectionIcon(title);
+
+    // Map legacy titles to new user-friendly titles
+    const displayTitle = getDisplayTitle(title);
+
+    return (
+        <div className="glass-panel !bg-[#00245D]/5 !border-white/40 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+            {/* Section Header */}
+            <div className="px-6 py-4 border-b border-white/30 bg-white/10 backdrop-blur-sm">
+                <h4 className="font-bold text-lg flex items-center gap-3 tracking-tight text-[#00245D]">
+                    <span className="w-8 h-8 rounded-lg bg-[#00245D] text-white flex items-center justify-center text-sm shadow-md">{getSectionIcon(displayTitle)}</span>
+                    {displayTitle}
+                </h4>
+            </div>
+
+            {/* Section Content */}
+            <div className="p-6">
+                {hasNumberedItems ? (
+                    <NumberedList content={restContent} />
+                ) : hasBulletItems ? (
+                    <BulletList content={restContent} />
+                ) : (
+                    <p className="text-[#00245D]/80 leading-relaxed text-base">{restContent}</p>
+                )}
+            </div>
+        </div>
+    );
+}
+
+// Map specific titles to new values
+function getDisplayTitle(originalTitle: string): string {
+    const normalized = originalTitle.trim().toUpperCase();
+
+    // Check for "TARGET WINDOW" or similar
+    if (normalized.includes('TARGET WINDOW')) return 'Timeframe';
+
+    // Check for "TARGET STRENGTH" or similar
+    if (normalized.includes('TARGET STRENGTH')) return 'Skills + Connections + Equipment';
+
+    // Check for "DETAILED WRITTEN QUOTE" or similar
+    if (normalized.includes('DETAILED WRITTEN QUOTE')) return 'Budget';
+
+    return originalTitle;
+}
+
+// Render numbered items with their sub-bullets
+function NumberedList({ content }: { content: string }) {
+    // Split by numbered items like "1. ", "2. ", etc.
+    const items = content.split(/(?=\d+\.\s)/).filter(s => s.trim());
+
+    return (
+        <div className="space-y-4">
+            {items.map((item, index) => {
+                // Extract number and content (using [\s\S] instead of 's' flag for compatibility)
+                const match = item.match(/^(\d+)\.\s*([\s\S]+)/);
+                if (!match) return null;
+
+                const [, num, itemContent] = match;
+
+                // Check for sub-bullets within this item
+                const subItems = itemContent.split(/\s*[·•]\s*/).filter(s => s.trim());
+                const hasSubItems = subItems.length > 1;
+
+                return (
+                    <div key={index} className="flex gap-3">
+                        <div className="flex-shrink-0 w-7 h-7 bg-[#00245D] rounded-lg flex items-center justify-center text-white text-sm font-bold">
+                            {num}
+                        </div>
+                        <div className="flex-1">
+                            {hasSubItems ? (
+                                <>
+                                    <p className="font-semibold text-[#00245D] mb-2">{subItems[0]}</p>
+                                    <ul className="space-y-1.5 pl-2 border-l-2 border-[#99D6EA]">
+                                        {subItems.slice(1).map((subItem, subIndex) => (
+                                            <li key={subIndex} className="flex items-start gap-2 text-sm text-[#00245D]/70">
+                                                <span className="text-[#99D6EA] mt-0.5">•</span>
+                                                <span className="leading-relaxed">{subItem}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </>
+                            ) : (
+                                <p className="text-[#00245D]/75 leading-relaxed">{itemContent}</p>
+                            )}
+                        </div>
+                    </div>
+                );
+            })}
+        </div>
+    );
+}
+
+// Render bullet items
+function BulletList({ content }: { content: string }) {
+    const items = content.split(/\s*[·•]\s*/).filter(s => s.trim());
+
+    return (
+        <ul className="space-y-2">
+            {items.map((item, index) => (
+                <li key={index} className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 bg-[#99D6EA] rounded-full mt-2 flex-shrink-0"></span>
+                    <span className="text-[#00245D]/75 leading-relaxed text-sm">{item}</span>
+                </li>
+            ))}
+        </ul>
+    );
+}
+
+// Get appropriate icon for section
+function getSectionIcon(title: string): string {
+    const lowerTitle = title.toLowerCase();
+
+    if (lowerTitle.includes('overview')) return '📋';
+    if (lowerTitle.includes('scope')) return '🔧';
+    if (lowerTitle.includes('requirement')) return '📝';
+    if (lowerTitle.includes('deliverable')) return '📦';
+    if (lowerTitle.includes('experience')) return '🏆';
+    if (lowerTitle.includes('schedule') || lowerTitle.includes('timeline') || lowerTitle.includes('timeframe')) return '📅';
+    if (lowerTitle.includes('site') || lowerTitle.includes('location')) return '📍';
+    if (lowerTitle.includes('additional') || lowerTitle.includes('info')) return 'ℹ️';
+    if (lowerTitle.includes('budget')) return '💰';
+    if (lowerTitle.includes('skills')) return '💪';
+
+    return '📋';
+}

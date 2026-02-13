@@ -1,0 +1,431 @@
+@import "tailwindcss";
+
+/* Whitecaps London Academy Brand Colors */
+:root {
+  /* Primary Brand Colors */
+  --wfc-navy: #00245D;
+  --wfc-navy-light: #1a365d;
+  --wfc-navy-dark: #001a45;
+  --wfc-blue: #99D6EA;
+  --wfc-blue-light: #b3e0f0;
+  --wfc-blue-dark: #7EC8E3;
+  --wfc-tan: #D4C4A8;
+  --wfc-tan-light: #E8DCC8;
+  --wfc-tan-dark: #C4B498;
+  --wfc-white: #FFFFFF;
+  --wfc-silver: #C0C0C0;
+
+  /* Glassmorphism System - Enhanced Frost Effect */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 36, 93, 0.1);
+  --glass-blur: 40px;
+  /* Increased blur for "frosted" look */
+  --glass-shine: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%);
+
+  /* Dark Glass Mode (for Navy sections) */
+  --glass-dark-bg: rgba(0, 36, 93, 0.6);
+  --glass-dark-border: rgba(153, 214, 234, 0.3);
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.2) 100%);
+  --gradient-glow: radial-gradient(circle at top left, rgba(153, 214, 234, 0.4), transparent 70%);
+
+  /* Legacy mappings */
+  --background: transparent;
+  --foreground: var(--wfc-navy);
+  --primary: var(--wfc-navy);
+  --card-bg: var(--glass-bg);
+  --card-border: var(--glass-border);
+  --shadow-sm: 0 2px 4px 0 rgba(0, 36, 93, 0.05);
+  --shadow-md: 0 8px 16px -2px rgba(0, 36, 93, 0.1);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 36, 93, 0.15);
+  --shadow-glow: 0 0 30px rgba(153, 214, 234, 0.3);
+}
+
+@theme inline {
+  --color-background: transparent;
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-open-sans), system-ui, -apple-system, sans-serif;
+  --font-heading: 'Montserrat', system-ui, -apple-system, sans-serif;
+  --font-body: var(--font-open-sans), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono);
+
+  /* Custom brand colors for Tailwind */
+  --color-wfc-navy: #00245D;
+  --color-wfc-blue: #99D6EA;
+  --color-wfc-tan: #D4C4A8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+  background-color: transparent;
+}
+
+body {
+  color: var(--foreground);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  background-image: url('/caps-background.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  line-height: 1.6;
+  letter-spacing: 0.015em;
+}
+
+/* Responsive container for safe area on mobile */
+.container {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Hide scrollbar while maintaining scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari and Opera */
+}
+
+/* Typography - Headers use Obviously/Montserrat Heavy Bold */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Montserrat', system-ui, sans-serif;
+  font-weight: 800;
+}
+
+/* Sub-headers */
+.subheader {
+  font-family: 'Montserrat', system-ui, sans-serif;
+  font-weight: 600;
+}
+
+/* Modern Card Styles */
+.card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+  transform: translateY(-2px);
+}
+
+/* Glassmorphism */
+/* Glassmorphism System - Premium "Apple-like" Quality */
+.glass-panel {
+  @apply bg-white/10 backdrop-blur-[30px] backdrop-saturate-[1.8] border border-white/40 rounded-3xl shadow-2xl;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+  box-shadow:
+    0 8px 32px 0 rgba(31, 38, 135, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
+}
+
+.glass-panel-dark {
+  @apply bg-[#00245D]/50 backdrop-blur-[30px] backdrop-saturate-[1.8] border border-[#99D6EA]/30 rounded-3xl text-white;
+  box-shadow:
+    0 8px 32px 0 rgba(0, 0, 0, 0.3),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Modern Button Styles - Whitecaps Brand Premium */
+.btn-primary {
+  background: linear-gradient(180deg, rgba(0, 36, 93, 0.9) 0%, rgba(0, 26, 69, 1) 100%);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  /* Pill shape */
+  padding: 12px 28px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 36, 93, 0.2),
+    0 2px 4px -1px rgba(0, 36, 93, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 10px 15px -3px rgba(0, 36, 93, 0.3),
+    0 4px 6px -2px rgba(0, 36, 93, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  background: linear-gradient(180deg, rgba(0, 46, 113, 0.95) 0%, rgba(0, 30, 80, 1) 100%);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  background: linear-gradient(180deg, rgba(0, 20, 50, 1) 0%, rgba(0, 36, 93, 0.9) 100%);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--wfc-navy);
+  border-radius: 9999px;
+  padding: 10px 24px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.btn-glass:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 36, 93, 0.1);
+}
+
+.btn-glass:active {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(0);
+}
+
+/* Light Blue Button Variant */
+.btn-accent {
+  background: linear-gradient(180deg, #99D6EA 0%, #7EC8E3 100%);
+  color: var(--wfc-navy);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 9999px;
+  padding: 12px 24px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  box-shadow:
+    0 4px 6px -1px rgba(126, 200, 227, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.btn-accent:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px -5px rgba(126, 200, 227, 0.4);
+  background: linear-gradient(180deg, #b3e0f0 0%, #8cd0ea 100%);
+}
+
+/* Modern Input Styles */
+.input-modern {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 12px 20px;
+  transition: all 0.3s ease;
+  width: 100%;
+  font-family: var(--font-body);
+}
+
+.input-modern:focus {
+  outline: none;
+  border-color: var(--wfc-navy);
+  box-shadow: 0 0 0 4px rgba(0, 36, 93, 0.1);
+}
+
+/* Gradient Text - Whitecaps Brand */
+.gradient-text {
+  background: linear-gradient(135deg, var(--wfc-navy) 0%, var(--wfc-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Strength Meter Colors */
+.strength-5 {
+  background: linear-gradient(90deg, #10b981, #059669);
+}
+
+.strength-4 {
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+
+.strength-3 {
+  background: linear-gradient(90deg, #eab308, #ca8a04);
+}
+
+.strength-2 {
+  background: linear-gradient(90deg, #f97316, #ea580c);
+}
+
+.strength-1 {
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+}
+
+/* Smooth Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out;
+  animation-fill-mode: both;
+}
+
+.animate-slideIn {
+  animation: slideIn 0.4s ease-out;
+  animation-fill-mode: both;
+}
+
+/* Category Badge Colors - Whitecaps themed */
+.badge-technology {
+  background: linear-gradient(135deg, var(--wfc-navy), var(--wfc-navy-dark));
+}
+
+.badge-trades {
+  background: linear-gradient(135deg, var(--wfc-blue), var(--wfc-blue-dark));
+}
+
+.badge-media {
+  background: linear-gradient(135deg, var(--wfc-navy-light), var(--wfc-navy));
+}
+
+.badge-legal {
+  background: linear-gradient(135deg, var(--wfc-navy), var(--wfc-navy-light));
+}
+
+.badge-finance {
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.badge-healthcare {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.badge-education {
+  background: linear-gradient(135deg, var(--wfc-blue-dark), var(--wfc-blue));
+}
+
+.badge-realestate {
+  background: linear-gradient(135deg, var(--wfc-tan-dark), var(--wfc-tan));
+}
+
+/* Scrollbar Styling - Hidden but scrollable */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+html,
+body {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+/* Whitecaps Brand Utilities */
+.bg-wfc-navy {
+  background-color: var(--wfc-navy);
+}
+
+.bg-wfc-blue {
+  background-color: var(--wfc-blue);
+}
+
+.bg-wfc-tan {
+  background-color: var(--wfc-tan);
+}
+
+.text-wfc-navy {
+  color: var(--wfc-navy);
+}
+
+.text-wfc-blue {
+  color: var(--wfc-blue);
+}
+
+.border-wfc-navy {
+  border-color: var(--wfc-navy);
+}
+
+.border-wfc-blue {
+  border-color: var(--wfc-blue);
+}
+
+/* Slogan styling */
+.slogan {
+  font-family: 'Montserrat', system-ui, sans-serif;
+  font-weight: 800;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Patterned Background */
+.bg-pattern {
+  position: relative;
+  background-color: transparent;
+}
+
+.bg-pattern::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/caps-background.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  pointer-events: none;
+  z-index: -1;
+}
